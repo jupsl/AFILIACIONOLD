@@ -587,7 +587,7 @@ class dbManager{
             $msquery=$msquery." DATOS_MUNICIPIOS.IdMunicipio, CRED_Afiliados.foto, CRED_Afiliados.IdCargo,CODIGO_POSTAL FROM PADRON_ELECTORAL LEFT JOIN DATOS_MUNICIPIOS ";
             $msquery=$msquery." ON DATOS_MUNICIPIOS.NUM_MUNICIPIO=CAST(PADRON_ELECTORAL.MUNICIPIO AS Int) LEFT JOIN PADRON_DATOS_PERSONALES ";
             $msquery=$msquery." ON PADRON_ELECTORAL.CLAVE_ELECTORAL=PADRON_DATOS_PERSONALES.CLAVE_ELECTORAL LEFT JOIN CRED_Afiliados ON CRED_Afiliados.ClaveElectoral=PADRON_ELECTORAL.CLAVE_ELECTORAL ";
-            $msquery=$msquery." WHERE APELLIDO_PATERNO LIKE '".$paterno."%' AND APELLIDO_MATERNO LIKE '".$materno."%' AND PADRON_ELECTORAL.NOMBRE LIKE '".$nombre."%' ";
+            $msquery=$msquery." WHERE APELLIDO_PATERNO LIKE '".$paterno."%' AND APELLIDO_MATERNO LIKE '".$materno."%' AND PADRON_ELECTORAL.NOMBRE LIKE '%".$nombre."%' ";
             $uss= array("","","","","","","","","","","","","","","");//,"","","");
             
             $msresults=mssql_query($msquery);
