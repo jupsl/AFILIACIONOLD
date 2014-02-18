@@ -530,10 +530,10 @@ class dbManager{
         
         public function getCredencial($ce){
 	    require("settings.php");
-	    $sql="SELECT A.Nombre+' ' +A.Paterno+' ' + A.Materno as Nomb, A.Calle+' N° '+ A.NumExt AS Domicilio, A.Colonia, A.Sexo, A.ClaveElectoral, DF.Num as DistritoFederal, DL.Num as DistritoLocal, S.Seccion, M.NOMBRE_MUNICIPIO, SO.Descripcion AS SectOrg,A.FechaAlta FROM ";
+	    $sql="SELECT A.Nombre+' ' +A.Paterno+' ' + A.Materno as Nomb, A.Calle+' N° '+ A.NumExt AS Domicilio, A.Colonia, A.Sexo, A.ClaveElectoral, DF.Num as DistritoFederal, DL.Num as DistritoLocal, S.Seccion, M.NOMBRE_MUNICIPIO, SO.Descripcion AS SectOrg,A.FechaAlta, CA.Descripcion FROM ";
 	    $sql=$sql." CRED_Afiliados A LEFT JOIN DATOS_Secciones S ON S.Seccion=A.Seccion LEFT JOIN DATOS_MUNICIPIOS M ON M.IdMunicipio=S.IdMunicipio LEFT JOIN DATOS_DistritosFederales DF ON DF.IdDistritoFederal=S.IdDistritoFederal LEFT JOIN DATOS_DistritosLocales DL ";
-	    $sql=$sql." ON DL.IdDistritoLocal=S.IdDistritoLocal LEFT JOIN CRED_Sector_Organizacion SO ON SO.IdClave=A.Id_Sector_Org WHERE A.ClaveElectoral='".$ce."'";
-	    $uss= array("","","","","","","","","","","");//,"","","");
+	    $sql=$sql." ON DL.IdDistritoLocal=S.IdDistritoLocal LEFT JOIN CRED_Sector_Organizacion SO ON SO.IdClave=A.Id_Sector_Org LEFT JOIN CRED_Cargos CA ON CA.IdCargo=A.IdCargo WHERE A.ClaveElectoral='".$ce."'";
+	    $uss= array("","","","","","","","","","","","");//,"","","");
             
             $msresults=mssql_query($sql);
             while($row=mssql_fetch_array($msresults)){
@@ -548,6 +548,7 @@ class dbManager{
                 $uss[8]=$row["NOMBRE_MUNICIPIO"];
 		$uss[9]=$row["SectOrg"];
 		$uss[10]=$row["FechaAlta"];
+		$uss[11]=$row["Descripcion"];
             }
             return $uss;
 	}

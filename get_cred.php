@@ -14,6 +14,7 @@ if(ISSET($_GET["ce"])){
     $municipio=$reporte[8];
     $sectorg=$reporte[9];
     $fecha=$reporte[10];
+    $cargo=$reporte[11];
 ?>
 <style type="text/css">
   .dato {
@@ -88,7 +89,13 @@ if($sectorg=="CNC"){
 <span class="dato" STYLE="position:absolute; top:135px; left:140px;  visibility:visible z-index:3"><?php echo(strtoupper($municipio)); ?></span>
 
 <span class="titulo" STYLE="position:absolute; top:148px; left:88px;  visibility:visible z-index:3">ENTIDAD</span>
+
 <span class="dato" STYLE="position:absolute; top:148px; left:135px;  visibility:visible z-index:3">08</span>
+<?php /*if($cargo!="NINGUNO"){ ?>
+<span class="titulo" STYLE="position:absolute; top:158px; left:88px;  visibility:visible z-index:3">CARGO</span>
+<span class="dato" STYLE="position:absolute; top:158px; left:135px;  visibility:visible z-index:3"><?php echo($cargo); ?></span>
+<?php }*/
+?>
 <span class="dato1" STYLE="position:absolute; top:180px; left:6x;  visibility:visible z-index:3">Fecha de Afiliacion</span>
 <?php
 $fecha=substr($fecha,0,11);
