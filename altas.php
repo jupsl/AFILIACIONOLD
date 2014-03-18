@@ -480,6 +480,10 @@
 		&nbsp;&nbsp;&nbsp;
 		<input type=button value="Tomar Foto" onClick="webcam.snap()">
 	</form>
+	<form action="cargar_foto.php" method="post" id="cargafoto" enctype="multipart/form-data">
+            <label for="fotoUp" >Seleccione un Archivo de foto de su equipo...</label><input type="file" name="fotoUp" class="btn btn-info" onchange="document.getElementById('cargafoto').submit();" />
+        <input type="hidden" name="ce" value="<?php echo($_COOKIE["ceAfiliado"]); ?>"/>
+        </form>
 	
 	<!-- Code to handle the server response (see test.php) -->
 	<script language="JavaScript">

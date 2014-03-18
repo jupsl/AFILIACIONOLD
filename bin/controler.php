@@ -682,7 +682,39 @@ class dbManager{
             }
 	    return $idsec;
 	}
-	
+	public function resizeImage($image, $dw, $dh, $q, $imgtype, $ow, $oh,$fullname){
+                $im = imagecreatetruecolor($dw, $dh);
+                $im_src = imagecreatefromstring($image);
+                $_w = 0;
+                $_h = 0;
+                $this->_scaleVector($dw, $dh, 0.95, $ow, $oh, $_w, $_h);
+                // displacement vector, this vector center the image.
+                $dx = ($dw - $_w)/2;
+                $dy = ($dh - $_h)/2;
+                $fillcolor = imagecolorallocate($im,255,255,255);
+                //$xcolor = imagecolorallocate($im, 200,200,200);
+                imagefilledrectangle($im, 0,0,$dw, $dh, $fillcolor);
+                //imagefilledrectangle($im, $dx,$dy, $dx + $_w, $dy + $_h, $xcolor);
+                imagecopyresampled(
+                                $im, $im_src,
+                                $dx, $dy, 0, 0,
+                                $_w, $_h,
+                                $ow, $oh
+                );
+                if($imgtype == 'png')
+                        return imagepng($im, $fullname, $q);
+                return imagejpeg($im, $fullname, $q);
+        }
+	private function _scaleVector($dw, $dh, $delta, $ow, $oh, &$out_w, &$out_h){
+                $dR = $dw / $dh;
+                if($dR >= 1){
+                        $out_w = $delta * $dw;
+                        $out_h = ($out_w * $oh) / $ow;
+                }else{
+                        $out_h = $delta * $dh;
+                        $out_w = ($out_h * $ow) / $oh;
+                }
+        }
 	
 	
 }
